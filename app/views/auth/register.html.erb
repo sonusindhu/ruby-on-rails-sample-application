@@ -1,0 +1,40 @@
+<% @page_title = "Create your account | Signup" %>
+<!-- login -->
+<div class="w3_login">
+	<h3>Sign Up</h3>
+	<div class="w3_login_module">
+		<div class="module form-module">
+			<div class="toggle">
+			</div>
+			<div class="form">
+				<h2>Create an account</h2>
+
+				<% if @user.errors.any? %>
+					<!-- <div class="alert alert-danger">
+					<% for message_error in @user.errors.full_messages %>
+					<p>* <%= message_error %></p>
+					<% end %>
+					</div> -->
+				<% end %>
+
+				<% if flash[:notice] %>
+					<p class="alert alert-success"><%= flash[:notice] %></p>
+				<% end %>
+
+				<%= form_for(:user, :url => {:controller => 'auth', :action => 'create'}) do |f| %>
+					<%= f.text_field :firstname, placeholder: "firstname" %>
+					<%= f.text_field :lastname, placeholder: "lastname" %>
+					<%= f.text_field :email, placeholder: "email" %>
+					<%= f.password_field :password, placeholder: "password" %>
+					<%= f.password_field :password_confirmation, placeholder: "confirm password" %>
+					<%= f.submit :Register %>
+				<% end %>
+
+				<style type="text/css">
+					.field_with_errors input{ border: 1px solid #f00 !important;   }
+				</style>
+			</div>
+			<div class="cta"><a href="/auth/login">Already login?</a></div>
+		</div>
+	</div>
+</div>	

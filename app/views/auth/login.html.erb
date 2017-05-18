@@ -1,0 +1,32 @@
+<!-- login -->
+<div class="w3_login">
+	<h3>Sign In</h3>
+	<div class="w3_login_module">
+		<div class="module form-module">
+
+			<div class="toggle">
+				<i class="fa fa-times fa-pencil"></i>
+				<div class="tooltip"><a style="color: #fff" href="/auth/register">Register</a></div>
+			</div>
+			<div class="form">
+				<h2>Login to your account</h2>
+
+				
+				<% if flash[:error] %>
+					<p class="alert alert-danger"><%= flash[:error] %></p>
+				<% end %>
+
+				<% if flash[:notice] %>
+					<p class="alert alert-success"><%= flash[:notice] %></p>
+				<% end %>
+				<%= form_for(:user, :url => {:controller => 'auth', :action => 'signin'}) do |f| %>
+					<%= f.text_field :email, placeholder: "email" %>
+					<%= f.password_field :password, placeholder: "password" %>
+					<%= f.submit :Login %>
+				<% end %>
+			</div>
+			<div class="cta"><a href="#">Forgot your password?</a></div>
+		</div>
+	</div>
+</div>	
+<%= debug params.inspect %>
