@@ -18,9 +18,9 @@ class AuthController < ApplicationController
   	if @user.save
   		flash[:notice] = "You signed up successfully"
   		redirect_to request.referer || root_path
-  	
-  	end
-  	render "register"
+  	else
+      render "register"
+  	end	
   end
 
 

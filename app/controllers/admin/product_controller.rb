@@ -7,7 +7,7 @@ class Admin::ProductController < ApplicationController
   end
 
   def add
-  	
+  	@product = Product.new
   end
 
   def create
@@ -15,13 +15,14 @@ class Admin::ProductController < ApplicationController
   	if @product.save
   		flash[:notice] = "Product added successfully"
   		redirect_to request.referer || root_path
+  	else
+  		render "add"	
   	end
-  	render "add"
   end
 
 
   def product_params
-  	params.require(:product).permit(:title,:description, :short_description, :categories_id, :available_from, :available_to, :sku, :price, :status)
+  	params.require(:product).permit(:title,:description, :short_description, :category_id, :available_from, :available_to, :sku, :price, :status)
   end
 
 end
