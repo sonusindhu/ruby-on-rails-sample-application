@@ -3,7 +3,7 @@ class Product < ApplicationRecord
 
 	validates :title, :presence => true, :length => { :in => 3..255 }
 	validates :short_description, :presence => true, :length => { :in => 3..255 }
-	validates :description, :presence => true, :length => { :in => 3..255 }
+	validates :description, :presence => true, :length => { :in => 3..10000 }
 	validates :sku, :presence => true, :uniqueness => true, :length => { :in => 3..15 }
 	validates :available_from, :presence => true
 	validates :available_to, :presence => true
