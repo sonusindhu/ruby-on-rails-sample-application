@@ -14,8 +14,10 @@ Rails.application.routes.draw do
 	get '/dashboard', to: 'users#dashboard', as: 'dashboard'
 
 	namespace :admin do
-		get '/', to: 'dashboard#index', as: 'admin_dashboard'
-
+		get '/', to: 'dashboard#index', as: 'admin_dashboard' # admin dashboard
+		get '/products', to: 'product#index', as: 'products' # all products
+		get '/product/add', to: 'product#add', as: 'add_product' # add products
+		post '/product/create', to: 'product#create'
 	end
 
 end

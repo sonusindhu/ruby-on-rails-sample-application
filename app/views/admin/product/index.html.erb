@@ -1,0 +1,192 @@
+<% @page_title = "Products" %>
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <!-- BEGIN PAGE HEAD-->
+        <div class="page-head">
+            <div class="container">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h1>Products
+                        <small>Products</small>
+                    </h1>
+                </div>
+                <!-- END PAGE TITLE -->
+            </div>
+        </div>
+        <!-- END PAGE HEAD-->
+        <!-- BEGIN PAGE CONTENT BODY -->
+        <div class="page-content">
+            <div class="container">
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="page-content-inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Begin: life time stats -->
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-shopping-cart"></i>Order Listing </div>
+                                    <div class="actions">
+                                        <a href="javascript:;" class="btn btn-circle btn-info">
+                                            <i class="fa fa-plus"></i>
+                                            <span class="hidden-xs"> New Order </span>
+                                        </a>
+                                        <div class="btn-group">
+                                            <a class="btn btn-circle btn-default dropdown-toggle" href="javascript:;" data-toggle="dropdown">
+                                                <i class="fa fa-share"></i>
+                                                <span class="hidden-xs"> Tools </span>
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <div class="dropdown-menu pull-right">
+                                                <li>
+                                                    <a href="javascript:;"> Export to Excel </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:;"> Export to CSV </a>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li>
+                                                <a href="javascript:;"> Print Invoices </a>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="table-container">
+                                        <div class="table-actions-wrapper">
+                                            <span> </span>
+                                            <select class="table-group-action-input form-control input-inline input-small input-sm">
+                                                <option value="">Select...</option>
+                                                <option value="publish">Publish</option>
+                                                <option value="unpublished">Un-publish</option>
+                                                <option value="delete">Delete</option>
+                                            </select>
+                                            <button class="btn btn-sm btn-success table-group-action-submit">
+                                                <i class="fa fa-check"></i> Submit</button>
+                                        </div>
+                                        <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_products">
+                                            <thead>
+                                                <tr role="row" class="heading">
+                                                    <th width="1%">
+                                                        <input type="checkbox" class="group-checkable"> </th>
+                                                    <th width="10%"> ID </th>
+                                                    <th width="15%"> Product&nbsp;Name </th>
+                                                    <th width="15%"> Category </th>
+                                                    <th width="10%"> Price </th>
+                                                    <th width="10%"> Quantity </th>
+                                                    <th width="15%"> Date&nbsp;Created </th>
+                                                    <th width="10%"> Status </th>
+                                                    <th width="10%"> Actions </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody> 
+                                                <tr role="row">
+                                                    <td width="1%">
+                                                        <input type="checkbox" class="group-checkable"> 
+                                                    </td>
+                                                    <td width="10%"> #1111 </td>
+                                                    <td width="15%"> iPhone 7 </td>
+                                                    <td width="15%"> Mobile phone </td>
+                                                    <td width="10%"> $350 </td>
+                                                    <td width="10%"> 1 </td>
+                                                    <td width="15%"> 2017/01/25 12:20 am </td>
+                                                    <td width="10%"> confirmed </td>
+                                                    <td width="10%"> Actions </td>
+                                                </tr>
+                                                <tr role="row">
+                                                    <td width="1%">
+                                                        <input type="checkbox" class="group-checkable"> 
+                                                    </td>
+                                                    <td width="10%"> #1111 </td>
+                                                    <td width="15%"> iPhone 7 </td>
+                                                    <td width="15%"> Mobile phone </td>
+                                                    <td width="10%"> $350 </td>
+                                                    <td width="10%"> 1 </td>
+                                                    <td width="15%"> 2017/01/25 12:20 am </td>
+                                                    <td width="10%"> confirmed </td>
+                                                    <td width="10%"> Actions </td>
+                                                </tr>
+                                                <tr role="row">
+                                                    <td width="1%">
+                                                        <input type="checkbox" class="group-checkable"> 
+                                                    </td>
+                                                    <td width="10%"> #1111 </td>
+                                                    <td width="15%"> iPhone 7 </td>
+                                                    <td width="15%"> Mobile phone </td>
+                                                    <td width="10%"> $350 </td>
+                                                    <td width="10%"> 1 </td>
+                                                    <td width="15%"> 2017/01/25 12:20 am </td>
+                                                    <td width="10%"> confirmed </td>
+                                                    <td width="10%"> Actions </td>
+                                                </tr>
+                                                <tr role="row">
+                                                    <td width="1%">
+                                                        <input type="checkbox" class="group-checkable"> 
+                                                    </td>
+                                                    <td width="10%"> #1111 </td>
+                                                    <td width="15%"> iPhone 7 </td>
+                                                    <td width="15%"> Mobile phone </td>
+                                                    <td width="10%"> $350 </td>
+                                                    <td width="10%"> 1 </td>
+                                                    <td width="15%"> 2017/01/25 12:20 am </td>
+                                                    <td width="10%"> confirmed </td>
+                                                    <td width="10%"> Actions </td>
+                                                </tr>
+                                                <tr role="row">
+                                                    <td width="1%">
+                                                        <input type="checkbox" class="group-checkable"> 
+                                                    </td>
+                                                    <td width="10%"> #1111 </td>
+                                                    <td width="15%"> iPhone 7 </td>
+                                                    <td width="15%"> Mobile phone </td>
+                                                    <td width="10%"> $350 </td>
+                                                    <td width="10%"> 1 </td>
+                                                    <td width="15%"> 2017/01/25 12:20 am </td>
+                                                    <td width="10%"> confirmed </td>
+                                                    <td width="10%"> Actions </td>
+                                                </tr>
+                                                <tr role="row">
+                                                    <td width="1%">
+                                                        <input type="checkbox" class="group-checkable"> 
+                                                    </td>
+                                                    <td width="10%"> #1111 </td>
+                                                    <td width="15%"> iPhone 7 </td>
+                                                    <td width="15%"> Mobile phone </td>
+                                                    <td width="10%"> $350 </td>
+                                                    <td width="10%"> 1 </td>
+                                                    <td width="15%"> 2017/01/25 12:20 am </td>
+                                                    <td width="10%"> confirmed </td>
+                                                    <td width="10%"> Actions </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End: life time stats -->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT INNER -->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT BODY -->
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->
+
+
+<% content_for :scripts do %>
+  <script type="text/javascript">
+      $(document).ready(function(){
+
+      });
+  </script>
+<% end %>
