@@ -1,0 +1,348 @@
+<% @page_title = "Edit product" %>
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <!-- BEGIN PAGE HEAD-->
+        <div class="page-head">
+            <div class="container">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h1>Product
+                        <small>Edit #<%= @product.id %></small>
+                    </h1>
+                </div>
+                <!-- END PAGE TITLE -->
+            </div>
+        </div>
+        <!-- END PAGE HEAD-->
+        <!-- BEGIN PAGE CONTENT BODY -->
+        <div class="page-content">
+            <div class="container">
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="page-content-inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <style type="text/css">
+                                .field_with_errors input, .field_with_errors textarea, .field_with_errors select{ border: 1px solid #f00 !important;   }
+                            </style>
+                            
+                            <%= form_for(:product, :url => {:controller => 'product', :action => 'edit' , :id=>@product.id}, :html => {:class => "form-horizontal form-row-seperated"} ) do |f| %>
+
+                                <% if @product.errors.any? %>
+                                    <div class="note note-danger">
+                                    <% for message_error in @product.errors.full_messages %>
+                                    <p>* <%= message_error %></p>
+                                    <% end %>
+                                    </div>
+                                <% end %>
+
+                                <% if flash[:notice] %>
+                                    <p class="note note-success"><%= flash[:notice] %></p>
+                                <% end %>
+                                <div class="portlet">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="fa fa-shopping-cart"></i>Edit Product 
+                                        </div>
+                                        <div class="actions btn-set">
+                                            <button class="btn btn-success">
+                                                <i class="fa fa-check-circle"></i> Save & Continue Edit</button>
+                                                <div class="btn-group">
+                                                    <a class="btn btn-success dropdown-toggle" href="javascript:;" data-toggle="dropdown">
+                                                        <i class="fa fa-share"></i> More
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu pull-right">
+                                                        <li>
+                                                            <a href="javascript:;"> Delete </a>
+                                                        </li>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="tabbable-bordered">
+                                            <ul class="nav nav-tabs">
+                                                <li>
+                                                    <a href="#tab_general" data-toggle="tab"> General </a>
+                                                </li>
+                                                <li class="active">
+                                                    <a href="#tab_images" data-toggle="tab"> Images </a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane" id="tab_general">
+                                                    <div class="form-body">
+                                                        
+                                                            <div class="form-group">
+                                                                <label class="col-md-2 control-label">Name:
+                                                                    <span class="required"> * </span>
+                                                                </label>
+                                                                <div class="col-md-10">
+                                                                    <%= f.text_field :title, class:"form-control", placeholder: "Enter product title" %>
+                                                                </div>    
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-2 control-label">Description:
+                                                                    <span class="required"> * </span>
+                                                                </label>
+                                                                <div class="col-md-10">
+                                                                    <%= f.text_area :description, class:"form-control", placeholder: "Enter product description" %>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-2 control-label">Short Description:
+                                                                    <span class="required"> * </span>
+                                                                </label>
+                                                                <div class="col-md-10">
+                                                                    <%= f.text_area :short_description, class:"form-control", placeholder: "Enter product short description" %>
+                                                                    <span class="help-block"> shown in product listing </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-2 control-label">Category:
+                                                                    <span class="required"> * </span>
+                                                                </label>
+                                                                <div class="col-md-10">
+                                                                      <%= f.collection_select :category_id, Category.order(:name),:id,:name, {:prompt=>true}, {class: "table-group-action-input form-control input-medium"} %>
+
+
+                                                                </div>
+                                                            </div>
+                                                           <!--  <div class="form-group">
+                                                                <label class="col-md-2 control-label">Available Date:
+                                                                    <span class="required"> * </span>
+                                                                </label>
+                                                                <div class="col-md-10">
+                                                                    <div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
+                                                                        
+                                                                        <%= f.text_field :available_from, class:"form-control", placeholder: "" %>
+                                                                        <span class="input-group-addon"> to </span>
+                                                                        <%= f.text_field :available_to, class:"form-control", placeholder: "" %>
+                                                                    </div>
+                                                                    <span class="help-block"> availability daterange. </span>
+                                                                </div>
+                                                            </div> -->
+                                                            <div class="form-group">
+                                                                <label class="col-md-2 control-label">SKU:
+                                                                    <span class="required"> * </span>
+                                                                </label>
+                                                                <div class="col-md-10">
+                                                                    <%= f.text_field :sku, class:"form-control input-medium", placeholder: "Enter product sku number" %>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-2 control-label">Price:
+                                                                    <span class="required"> * </span>
+                                                                </label>
+                                                                <div class="col-md-10">
+                                                                    <%= f.text_field :price, class:"form-control input-medium", placeholder: "Enter product price" %>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-2 control-label">Status:
+                                                                    <span class="required"> * </span>
+                                                                </label>
+                                                                <div class="col-md-10">
+                                                                    
+                                                                   <%= f.select(:status,  [["Published", 1], ["Not Published",0]], {} , {class: "table-group-action-input form-control input-medium"}) %>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                </div>
+                                                <div class="tab-pane active" id="tab_images">
+                                                    <div class="alert alert-success margin-bottom-10">
+                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                                        <i class="fa fa-warning fa-lg"></i> Image type and information need to be specified. </div>
+                                                    <div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10">
+                                                        <a id="tab_images_uploader_pickfiles" href="javascript:;" class="btn btn-success">
+                                                            <i class="fa fa-plus"></i> Select Files </a>
+                                                        <a id="tab_images_uploader_uploadfiles" href="javascript:;" class="btn btn-primary">
+                                                            <i class="fa fa-share"></i> Upload Files </a>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div id="tab_images_uploader_filelist" class="col-md-6 col-sm-12"> </div>
+                                                    </div>
+                                                    <table class="table table-bordered table-hover">
+                                                        <thead>
+                                                            <tr role="row" class="heading">
+                                                                <th width="8%"> Image </th>
+                                                                <th width="10%"> Featured image </th>
+                                                                <th width="10%"> </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="../assets/pages/media/works/img1.jpg" class="fancybox-button" data-rel="fancybox-button">
+                                                                        <img class="img-responsive" src="../assets/pages/media/works/img1.jpg" alt=""> 
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="radio" name="product[images][1][image_type]" value="1"> 
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="javascript:;" class="btn btn-default btn-sm">
+                                                                        <i class="fa fa-times"></i> Remove </a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT INNER -->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT BODY -->
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+    
+</div>
+<!-- END CONTAINER -->
+
+<% content_for :scripts do %>
+    <script type="text/javascript">
+        var EcommerceProductsEdit = function () {
+
+            var handleImages = function() {
+
+                // see http://www.plupload.com/
+                var uploader = new plupload.Uploader({
+                    runtimes : 'html5,flash,silverlight,html4',
+                     
+                    browse_button : document.getElementById('tab_images_uploader_pickfiles'), // you can pass in id...
+                    container: document.getElementById('tab_images_uploader_container'), // ... or DOM Element itself
+                     
+                    url : "/admin/product/img/upload/<%=@product.id%>",
+                    resize: {
+                      width: 1000,
+                      height: 1000,
+                      crop: true,
+                      quality: 90
+                    },
+                     
+                    filters : {
+                        max_file_size : '10mb',
+                        mime_types: [
+                            {title : "Image files", extensions : "jpg,gif,png"},
+                            //{title : "Zip files", extensions : "zip"}
+                        ]
+                    },
+                 
+                    // Flash settings
+                    flash_swf_url : 'assets/plugins/plupload/js/Moxie.swf',
+             
+                    // Silverlight settings
+                    silverlight_xap_url : 'assets/plugins/plupload/js/Moxie.xap',             
+                 
+                    init: {
+                        PostInit: function() {
+                            $('#tab_images_uploader_filelist').html("");
+                 
+                            $('#tab_images_uploader_uploadfiles').click(function() {
+                                uploader.start();
+                                return false;
+                            });
+
+                            $('#tab_images_uploader_filelist').on('click', '.added-files .remove', function(){
+                                uploader.removeFile($(this).parent('.added-files').attr("id"));    
+                                $(this).parent('.added-files').remove();                     
+                            });
+                        },
+                 
+                        FilesAdded: function(up, files) {
+                            plupload.each(files, function(file) {
+                                $('#tab_images_uploader_filelist').append('<div class="alert alert-warning added-files" id="uploaded_file_' + file.id + '">' + file.name + '(' + plupload.formatSize(file.size) + ') <span class="status label label-info"></span>&nbsp;<a href="javascript:;" style="margin-top:-5px" class="remove pull-right btn btn-sm red"><i class="fa fa-times"></i> remove</a></div>');
+                            });
+                        },
+                 
+                        UploadProgress: function(up, file) {
+                            $('#uploaded_file_' + file.id + ' > .status').html(file.percent + '%');
+                        },
+
+                        FileUploaded: function(up, file, response) {
+                            var response = $.parseJSON(response.response);
+                            if (response.result && response.result == 'OK') {
+                                var id = response.id;
+                                $('#uploaded_file_' + file.id + ' > .status').removeClass("label-info").addClass("label-success").html('<i class="fa fa-check"></i> Done');
+                            } else {
+                                $('#uploaded_file_' + file.id + ' > .status').removeClass("label-info").addClass("label-danger").html('<i class="fa fa-warning"></i> Failed'); // set failed upload
+                                App.alert({type: 'danger', message: 'One of uploads failed. Please retry.', closeInSeconds: 10, icon: 'warning'});
+                            }
+                        },
+
+                        UploadComplete: function(up, file){
+                            window.location.reload();
+                        },
+                 
+                        Error: function(up, err) {
+                            App.alert({type: 'danger', message: err.message, closeInSeconds: 10, icon: 'warning'});
+                        }
+                    }
+                });
+
+                uploader.init();
+
+            }
+
+
+            var initComponents = function () {
+                //init datepickers
+                $('.date-picker').datepicker({
+                    rtl: App.isRTL(),
+                    autoclose: true
+                });
+
+                //init datetimepickers
+                $(".datetime-picker").datetimepicker({
+                    isRTL: App.isRTL(),
+                    autoclose: true,
+                    todayBtn: true,
+                    pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left"),
+                    minuteStep: 10
+                });
+
+                //init maxlength handler
+                $('.maxlength-handler').maxlength({
+                    limitReachedClass: "label label-danger",
+                    alwaysShow: true,
+                    threshold: 5
+                });
+            }
+
+            return {
+
+                //main function to initiate the module
+                init: function () {
+                    initComponents();
+
+                    handleImages();
+                    //handleReviews();
+                    //handleHistory();
+                }
+
+            };
+
+        }();
+
+        jQuery(document).ready(function() {    
+           EcommerceProductsEdit.init();
+        });
+    </script>
+<% end %>

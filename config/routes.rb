@@ -17,7 +17,10 @@ Rails.application.routes.draw do
 		get '/', to: 'dashboard#index', as: 'admin_dashboard' # admin dashboard
 		get '/products', to: 'product#index', as: 'products' # all products
 		get '/product/add', to: 'product#add', as: 'add_product' # add products
-		post '/product/create', to: 'product#create'
+		post '/product/create', to: 'product#create' # add products posts
+		get '/product/edit/:id', to: 'product#edit' #product edit
+		post '/product/edit/:id', to: 'product#edit' # edit products posts
+		post '/product/img/upload/:id', to: 'product#upload' # upload product image
 	end
 
 end
