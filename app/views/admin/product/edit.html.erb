@@ -61,7 +61,7 @@
                                                     </a>
                                                     <div class="dropdown-menu pull-right">
                                                         <li>
-                                                            <a href="javascript:;"> Delete </a>
+                                                            <a href="javascript:;" class="deleteProduct" delid="<%=@product.id%>"> Delete </a>
                                                         </li>
                                                     </div>
                                                 </div>
@@ -346,6 +346,7 @@
         $(document).ready(function() {    
            EcommerceProductsEdit.init();
 
+           // delete product image
            $(".removeProductImage").click(function(){
                 var imageID = $(this).attr('id');
                 swal({
@@ -365,6 +366,36 @@
                         //var response = $.parseJSON(res);
                         if(response.result=="OK")
                             window.location.reload();
+                        else
+                            swal("Errors!", "Something went wrong, please try again later.", "error");
+                      },
+                      dataType: "json"
+                    });
+                    
+                });
+           });
+           // ended
+
+
+           // delete product
+           $(".deleteProduct").click(function(){
+                var productID = $(this).attr('delid');
+                swal({
+                  title: "Are you sure?",
+                  text: "You will not be able to recover this product!",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "Yes, delete it!",
+                  closeOnConfirm: false
+                },
+                function(){
+                    $.ajax({
+                      type: "POST",
+                      url: "/admin/product/delete/"+productID,
+                      success: function(response){
+                        if(response.result=="OK")
+                            window.location.href = "/admin/products";
                         else
                             swal("Errors!", "Something went wrong, please try again later.", "error");
                       },

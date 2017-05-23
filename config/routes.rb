@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 		post '/product/create', to: 'product#create' # add products posts
 		get '/product/edit/:id', to: 'product#edit' #product edit
 		post '/product/edit/:id', to: 'product#edit' # edit products posts
+		post '/product/delete/:id', to: 'product#delete' #product edit
+
 		post '/product/img/upload/:id', to: 'product#upload' # upload product image
 		post '/product/image/delete/:id', to: 'product#imageDelete' #product edit
 	end

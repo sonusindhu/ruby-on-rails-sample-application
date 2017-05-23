@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
 	belongs_to :category
-	has_many :image
+	has_many :image, dependent: :destroy
 
 	validates :title, :presence => true, :length => { :in => 3..255 }
 	validates :short_description, :presence => true, :length => { :in => 3..255 }

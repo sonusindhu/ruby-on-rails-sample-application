@@ -1,5 +1,5 @@
 class Admin::ProductController < ApplicationController
-	skip_before_action :verify_authenticity_token, :only => [:upload,:imageDelete]
+	skip_before_action :verify_authenticity_token, :only => [:upload,:imageDelete,:delete]
 	before_action :authenticate_admin, :only => [:index,:add,:create]
 	layout "admin"
 	def index
@@ -30,6 +30,22 @@ class Admin::ProductController < ApplicationController
 			redirect_to("/admin/product/edit/#{@product.id}")
 		end
 	end
+
+	def delete
+		@product = Product.find(params[:id])
+		if @product
+			flash[:notice] = "Product deleted! ID: #{@product.id}"
+			@product.destroy
+			my_array = {'result'=>'OK'}
+			render :json => my_array
+		else
+			my_array = {'result'=>'error'}
+			render :json => []	
+		end
+	end
+
+	
+
 
 	def upload
 		@product = Product.find(params[:id])

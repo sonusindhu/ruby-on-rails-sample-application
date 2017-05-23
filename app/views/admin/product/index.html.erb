@@ -31,7 +31,7 @@
                                     <div class="caption">
                                         <i class="fa fa-shopping-cart"></i>Order Listing </div>
                                     <div class="actions">
-                                        <a href="javascript:;" class="btn btn-circle btn-info">
+                                        <a href="/admin/product/add" class="btn btn-circle btn-info">
                                             <i class="fa fa-plus"></i>
                                             <span class="hidden-xs"> New Order </span>
                                         </a>
@@ -57,7 +57,15 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
+
                                     <div class="table-container">
+                                        <% if flash[:notice] %>
+                                            <p class="note note-success"><%= flash[:notice] %></p>
+                                        <% end %>
+
+                                        <% if flash[:errors] %>
+                                            <p class="note note-danger"><%= flash[:errors] %></p>
+                                        <% end %>
                                         <div class="table-actions-wrapper">
                                             <span> </span>
                                             <select class="table-group-action-input form-control input-inline input-small input-sm">
@@ -102,7 +110,13 @@
                                                         <% end %>
                                                     </td>
                                                     <td width="10%">
-                                                        <a href="/admin/product/edit/<%=product.id%>" class="btn btn-sm btn-success">Edit</a>
+                                                        <a href="/admin/product/edit/<%=product.id%>" class="btn btn-sm btn-success">
+                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                        </a>
+
+                                                        <a href="javascript:;" class="btn btn-sm btn-danger deleteProduct" delid="<%=product.id%>">
+                                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                                 <% end %>
@@ -130,7 +144,33 @@
 <% content_for :scripts do %>
   <script type="text/javascript">
       $(document).ready(function(){
-
+            // delete product
+           $(".deleteProduct").click(function(){
+                var productID = $(this).attr('delid');
+                swal({
+                  title: "Are you sure?",
+                  text: "You will not be able to recover this product!",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "Yes, delete it!",
+                  closeOnConfirm: false
+                },
+                function(){
+                    $.ajax({
+                      type: "POST",
+                      url: "/admin/product/delete/"+productID,
+                      success: function(response){
+                        if(response.result=="OK")
+                            window.location.href = "/admin/products";
+                        else
+                            swal("Errors!", "Something went wrong, please try again later.", "error");
+                      },
+                      dataType: "json"
+                    });
+                    
+                });
+           });
       });
   </script>
 <% end %>
