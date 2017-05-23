@@ -80,9 +80,6 @@ class Admin::ProductController < ApplicationController
 	def imageDelete
 		@image = Image.find(params[:id])
 		if @image
-			File.open(Rails.root.join('app/assets', 'uploads', @image.name)) do |f|
-			  File.delete(Rails.root.join('app/assets', 'uploads', @image.name))
-			end
 			flash[:notice] = "Product image deleted!"
 			@image.destroy
 			my_array = {'result'=>'OK'}
