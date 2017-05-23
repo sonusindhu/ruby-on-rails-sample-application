@@ -42,6 +42,10 @@
                                 <% if flash[:notice] %>
                                     <p class="note note-success"><%= flash[:notice] %></p>
                                 <% end %>
+
+                                <% if flash[:errors] %>
+                                    <p class="note note-danger"><%= flash[:errors] %></p>
+                                <% end %>
                                 <div class="portlet">
                                     <div class="portlet-title">
                                         <div class="caption">
@@ -157,9 +161,7 @@
                                                     
                                                 </div>
                                                 <div class="tab-pane active" id="tab_images">
-                                                    <div class="alert alert-success margin-bottom-10">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-                                                        <i class="fa fa-warning fa-lg"></i> Image type and information need to be specified. </div>
+                                                    
                                                     <div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10">
                                                         <a id="tab_images_uploader_pickfiles" href="javascript:;" class="btn btn-success">
                                                             <i class="fa fa-plus"></i> Select Files </a>
@@ -178,22 +180,22 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="../assets/pages/media/works/img1.jpg" class="fancybox-button" data-rel="fancybox-button">
-                                                                        <img class="img-responsive" src="../assets/pages/media/works/img1.jpg" alt=""> 
-                                                                    </a>
-                                                                </td>
-                                                                <td>
-                                                                    <label>
-                                                                        <input type="radio" name="product[images][1][image_type]" value="1"> 
-                                                                    </label>
-                                                                </td>
-                                                                <td>
-                                                                    <a href="javascript:;" class="btn btn-default btn-sm">
-                                                                        <i class="fa fa-times"></i> Remove </a>
-                                                                </td>
-                                                            </tr>
+                                                            <% @product.image.each do |image| %>
+                                                                <tr>
+                                                                    <td>
+                                                                        <img class="img-responsive" src="/assets<%=image.name%>" alt="">
+                                                                    </td>
+                                                                    <td>
+                                                                        <label>
+                                                                            <input type="radio" name="images[featured]" value="<%=image.id%>" class="changeFeaturedImage"> 
+                                                                        </label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="javascript:;" class="btn btn-default btn-sm removeProductImage" id="<%=image.id%>">
+                                                                            <i class="fa fa-times"></i> Remove </a>
+                                                                    </td>
+                                                                </tr>
+                                                            <% end %>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -212,7 +214,7 @@
         <!-- END CONTENT BODY -->
     </div>
     <!-- END CONTENT -->
-    
+    <%= debug @product.image %>
 </div>
 <!-- END CONTAINER -->
 
@@ -341,8 +343,37 @@
 
         }();
 
-        jQuery(document).ready(function() {    
+        $(document).ready(function() {    
            EcommerceProductsEdit.init();
+
+           $(".removeProductImage").click(function(){
+                var imageID = $(this).attr('id');
+                swal({
+                  title: "Are you sure?",
+                  text: "You will not be able to recover this image!",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "Yes, delete it!",
+                  closeOnConfirm: false
+                },
+                function(){
+                    $.ajax({
+                      type: "POST",
+                      url: "/admin/product/image/delete/"+imageID,
+                      success: function(response){
+                        //var response = $.parseJSON(res);
+                        if(response.result=="OK")
+                            window.location.reload();
+                        else
+                            swal("Errors!", "Something went wrong, please try again later.", "error");
+                      },
+                      dataType: "json"
+                    });
+                    
+                });
+           });
+
         });
     </script>
 <% end %>

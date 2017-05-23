@@ -78,91 +78,35 @@
                                                     <th width="15%"> Product&nbsp;Name </th>
                                                     <th width="15%"> Category </th>
                                                     <th width="10%"> Price </th>
-                                                    <th width="10%"> Quantity </th>
                                                     <th width="15%"> Date&nbsp;Created </th>
                                                     <th width="10%"> Status </th>
                                                     <th width="10%"> Actions </th>
                                                 </tr>
                                             </thead>
                                             <tbody> 
-                                                <tr role="row">
+                                                <% @products.each do |product| %>
+                                                    <tr role="row">
                                                     <td width="1%">
                                                         <input type="checkbox" class="group-checkable"> 
                                                     </td>
-                                                    <td width="10%"> #1111 </td>
-                                                    <td width="15%"> iPhone 7 </td>
-                                                    <td width="15%"> Mobile phone </td>
-                                                    <td width="10%"> $350 </td>
-                                                    <td width="10%"> 1 </td>
-                                                    <td width="15%"> 2017/01/25 12:20 am </td>
-                                                    <td width="10%"> confirmed </td>
-                                                    <td width="10%"> Actions </td>
-                                                </tr>
-                                                <tr role="row">
-                                                    <td width="1%">
-                                                        <input type="checkbox" class="group-checkable"> 
+                                                    <td width="10%"> #<%=product.id%> </td>
+                                                    <td width="15%"> <%=product.title%> </td>
+                                                    <td width="15%"> <%=product.category.name%> </td>
+                                                    <td width="10%"> $<%=product.price%> </td>
+                                                    <td width="15%"> <%=product.created_at%> </td>
+                                                    <td width="10%"> 
+                                                        <% if product.status? %>
+                                                          Active
+                                                        <% else %>
+                                                          Inactive
+                                                        <% end %>
                                                     </td>
-                                                    <td width="10%"> #1111 </td>
-                                                    <td width="15%"> iPhone 7 </td>
-                                                    <td width="15%"> Mobile phone </td>
-                                                    <td width="10%"> $350 </td>
-                                                    <td width="10%"> 1 </td>
-                                                    <td width="15%"> 2017/01/25 12:20 am </td>
-                                                    <td width="10%"> confirmed </td>
-                                                    <td width="10%"> Actions </td>
-                                                </tr>
-                                                <tr role="row">
-                                                    <td width="1%">
-                                                        <input type="checkbox" class="group-checkable"> 
+                                                    <td width="10%">
+                                                        <a href="/admin/product/edit/<%=product.id%>" class="btn btn-sm btn-success">Edit</a>
                                                     </td>
-                                                    <td width="10%"> #1111 </td>
-                                                    <td width="15%"> iPhone 7 </td>
-                                                    <td width="15%"> Mobile phone </td>
-                                                    <td width="10%"> $350 </td>
-                                                    <td width="10%"> 1 </td>
-                                                    <td width="15%"> 2017/01/25 12:20 am </td>
-                                                    <td width="10%"> confirmed </td>
-                                                    <td width="10%"> Actions </td>
                                                 </tr>
-                                                <tr role="row">
-                                                    <td width="1%">
-                                                        <input type="checkbox" class="group-checkable"> 
-                                                    </td>
-                                                    <td width="10%"> #1111 </td>
-                                                    <td width="15%"> iPhone 7 </td>
-                                                    <td width="15%"> Mobile phone </td>
-                                                    <td width="10%"> $350 </td>
-                                                    <td width="10%"> 1 </td>
-                                                    <td width="15%"> 2017/01/25 12:20 am </td>
-                                                    <td width="10%"> confirmed </td>
-                                                    <td width="10%"> Actions </td>
-                                                </tr>
-                                                <tr role="row">
-                                                    <td width="1%">
-                                                        <input type="checkbox" class="group-checkable"> 
-                                                    </td>
-                                                    <td width="10%"> #1111 </td>
-                                                    <td width="15%"> iPhone 7 </td>
-                                                    <td width="15%"> Mobile phone </td>
-                                                    <td width="10%"> $350 </td>
-                                                    <td width="10%"> 1 </td>
-                                                    <td width="15%"> 2017/01/25 12:20 am </td>
-                                                    <td width="10%"> confirmed </td>
-                                                    <td width="10%"> Actions </td>
-                                                </tr>
-                                                <tr role="row">
-                                                    <td width="1%">
-                                                        <input type="checkbox" class="group-checkable"> 
-                                                    </td>
-                                                    <td width="10%"> #1111 </td>
-                                                    <td width="15%"> iPhone 7 </td>
-                                                    <td width="15%"> Mobile phone </td>
-                                                    <td width="10%"> $350 </td>
-                                                    <td width="10%"> 1 </td>
-                                                    <td width="15%"> 2017/01/25 12:20 am </td>
-                                                    <td width="10%"> confirmed </td>
-                                                    <td width="10%"> Actions </td>
-                                                </tr>
+                                                <% end %>
+                                                
                                             </tbody>
                                         </table>
                                     </div>

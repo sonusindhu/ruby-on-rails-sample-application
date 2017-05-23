@@ -15,37 +15,54 @@ ActiveRecord::Schema.define(version: 20170510090329) do
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "slug"
-    t.integer "parent"
+    t.integer "parent", default: 0
     t.integer "products_count"
     t.integer "status"
-    t.bigint "products_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["products_id"], name: "index_categories_on_products_id"
+  end
+
+  create_table "images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name", null: false
+    t.integer "featured"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_images_on_product_id"
+  end
+
+  create_table "images_", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "product_id", null: false
+    t.string "name", null: false
+    t.integer "featured", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
-    t.string "slug"
+    t.string "sku"
     t.text "description"
-    t.integer "category_id"
+    t.text "short_description"
+    t.string "available_from", limit: 55
+    t.string "available_to", limit: 55
+    t.string "price", limit: 50
     t.integer "status"
-    t.bigint "categories_id"
+    t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["categories_id"], name: "index_products_on_categories_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "firstname"
     t.string "lastname"
     t.string "email"
-    t.string "password"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "user_type"
+    t.string "user_type", default: "normal"
     t.string "salt"
+    t.string "encrypted_password", null: false
   end
 
 end

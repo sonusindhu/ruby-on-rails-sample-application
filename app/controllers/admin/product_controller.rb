@@ -1,9 +1,10 @@
 class Admin::ProductController < ApplicationController
-	skip_before_action :verify_authenticity_token, :only => [:upload]
+	skip_before_action :verify_authenticity_token, :only => [:upload,:imageDelete]
 	before_action :authenticate_admin, :only => [:index,:add,:create]
 	layout "admin"
 	def index
 		@categories = Category.select("id, name")
+		@products = Product.all
 	end
 
 	def add
@@ -14,7 +15,7 @@ class Admin::ProductController < ApplicationController
 		@product = Product.new(product_params)
 		if @product.save
 			flash[:notice] = "Product added successfully"
-			redirect_to("/product/edit/#{@product.id}")
+			redirect_to("/admin/product/edit/#{@product.id}")
 		else
 			render "add"
 		end
@@ -24,8 +25,9 @@ class Admin::ProductController < ApplicationController
 	def edit
 		@product = Product.find(params[:id])
 		if params.include?(:product)
+			Product.update(product_params)
 			flash[:notice] = "Product updated successfully"
-			redirect_to("/product/edit/#{@product.id}")
+			redirect_to("/admin/product/edit/#{@product.id}")
 		end
 	end
 
@@ -50,13 +52,29 @@ class Admin::ProductController < ApplicationController
 	        @images.featured = 0;
 	        @images.save
 
-	        my_array = {'result'=>"OK",'id'=>@images.id}
-
+	        my_array = {'result'=>'OK'}
 			render :json => my_array
 		else
 			render :json => []
 		end
 		
+	end
+
+
+	def imageDelete
+		@image = Image.find(params[:id])
+		if @image
+			File.open(Rails.root.join('app/assets', 'uploads', @image.name)) do |f|
+			  File.delete(Rails.root.join('app/assets', 'uploads', @image.name))
+			end
+			flash[:notice] = "Product image deleted!"
+			@image.destroy
+			my_array = {'result'=>'OK'}
+			render :json => my_array
+		else
+			my_array = {'result'=>'error'}
+			render :json => []	
+		end
 	end
 
 

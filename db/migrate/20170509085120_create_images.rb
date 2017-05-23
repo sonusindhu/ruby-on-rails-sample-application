@@ -3,7 +3,7 @@ class CreateImages < ActiveRecord::Migration[5.1]
     create_table :images do |t|
       t.string :name, null: false
       t.integer :featured
-      t.references :products, index: true
+      t.references :product, index: true
       t.timestamps
     end
   end
